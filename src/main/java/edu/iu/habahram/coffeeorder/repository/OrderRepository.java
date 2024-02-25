@@ -1,15 +1,26 @@
 package edu.iu.habahram.coffeeorder.repository;
 
 import edu.iu.habahram.coffeeorder.model.*;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class OrderRepository {
+    private int OrderCount = 0;
     public Receipt add(OrderData order) throws Exception {
         Beverage beverage = null;
         switch (order.beverage().toLowerCase()) {
             case "dark roast":
                 beverage = new DarkRoast();
+                break;
+            case "decaf":
+                beverage = new Decaf();
+                break;
+            case "espresso":
+                beverage = new Espresso();
+                break;
+            case "house blend":
+                beverage = new HouseBlend();
                 break;
         }
         if (beverage == null) {
@@ -23,11 +34,18 @@ public class OrderRepository {
                 case "mocha":
                     beverage = new Mocha(beverage);
                     break;
+                case "soy":
+                    beverage = new Soy(beverage);
+                    break;
+                case "whip":
+                    beverage = new Whip(beverage);
+                    break;
                 default:
                     throw new Exception("Condiment type '%s' is not valid".formatted(condiment));
             }
         }
-        Receipt receipt = new Receipt(beverage.getDescription(), beverage.cost());
+        Receipt receipt = new Receipt(OrderCount ,beverage.getDescription(), beverage.cost());
+        OrderCount += 1;
         return receipt;
     }
 }
