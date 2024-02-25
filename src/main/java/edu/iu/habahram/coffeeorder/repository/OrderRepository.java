@@ -3,6 +3,8 @@ package edu.iu.habahram.coffeeorder.repository;
 import edu.iu.habahram.coffeeorder.model.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
+import java.io.File;
+import java.io.FileWriter;
 
 @Repository
 public class OrderRepository {
@@ -45,6 +47,9 @@ public class OrderRepository {
             }
         }
         Receipt receipt = new Receipt(OrderCount ,beverage.getDescription(), beverage.cost());
+        FileWriter w = new FileWriter("db.txt",true);
+        w.write(String.valueOf(OrderCount) + ", " + beverage.getDescription() + ", " + beverage.cost());
+        w.close();
         OrderCount += 1;
         return receipt;
     }
