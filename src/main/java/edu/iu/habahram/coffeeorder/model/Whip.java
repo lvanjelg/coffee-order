@@ -7,11 +7,11 @@ public class Whip extends CondimentDecorator{
 
     @Override
     public float cost() {
-        return .25F;
+        return Math.round((beverage.cost() + .25F) * 100.0F)/100.0F;
     }
 
     @Override
     public String getDescription() {
-        return "Whip";
+        return beverage.getDescription() + ", Whip";
     }
 }

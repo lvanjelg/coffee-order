@@ -7,7 +7,7 @@ public class Milk extends CondimentDecorator{
 
     @Override
     public float cost() {
-        return  beverage.cost() + 0.4F;
+        return  Math.round((beverage.cost() + .4F) * 100.0F)/100.0F;
     }
 
     @Override
