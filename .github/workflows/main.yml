@@ -35,7 +35,7 @@ jobs:
           fail-on-error: true
 
       - name: Build and push the image
-        run:
+        run: |
             docker login --username lvanjelg --password ${{secrets.ACCESS_TOKEN}} ghcr.io
             docker build -t ghcr.io/lvanjelg/coffee-order:latest --file Dockerfile .  
             docker push ghcr.io/lvanjelg/coffee-order:latest
