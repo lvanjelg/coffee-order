@@ -22,7 +22,7 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<?> add(@RequestBody OrderData order) {
         try {
-            Receipt receipt = orderRepository.add(order);
+            OrderData receipt = orderRepository.save(order);
             return ResponseEntity
                     .status(HttpStatus.CREATED)
                     .body(receipt);
