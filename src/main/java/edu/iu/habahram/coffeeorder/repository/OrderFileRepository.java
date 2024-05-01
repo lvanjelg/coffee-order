@@ -5,12 +5,11 @@ import org.springframework.stereotype.Repository;
 
 import java.io.FileWriter;
 
-@Repository
 public class OrderFileRepository {
     private int OrderCount = 0;
     public Receipt add(OrderData order) throws Exception {
         Beverage beverage = null;
-        switch (order.beverage().toLowerCase()) {
+        switch (order.getBeverage().toLowerCase()) {
             case "dark roast":
                 beverage = new DarkRoast();
                 break;
@@ -25,9 +24,9 @@ public class OrderFileRepository {
                 break;
         }
         if (beverage == null) {
-            throw new Exception("Beverage type '%s' is not valid!".formatted(order.beverage()));
+            throw new Exception("Beverage type '%s' is not valid!".formatted(order.getBeverage()));
         }
-        for(String condiment : order.condiments()) {
+        for(String condiment : order.getCondiments()) {
             switch (condiment.toLowerCase()) {
                 case "milk":
                    beverage = new Milk(beverage);
